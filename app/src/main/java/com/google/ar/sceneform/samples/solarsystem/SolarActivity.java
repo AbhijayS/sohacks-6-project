@@ -402,7 +402,13 @@ public class SolarActivity extends AppCompatActivity {
     ArrayList<City> cities = new ArrayList<>();
     for (CSVRecord record : records) {
       if (record.get("capital").equals("primary")) {
-        cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
+        try {
+          cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
+        }
+        catch (Exception e){
+
+        }
+
       }
     }
 
