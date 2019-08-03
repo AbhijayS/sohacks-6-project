@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,14 +43,22 @@ import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.ViewRenderable;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import org.apache.commons.csv.*;
 
 /**
  * This is a simple example that shows how to create an augmented reality (AR) application using the
  * ARCore and Sceneform APIs.
  */
 public class SolarActivity extends AppCompatActivity {
+
   private static final int RC_PERMISSIONS = 0x123;
   private boolean installRequested;
 
@@ -85,6 +94,7 @@ public class SolarActivity extends AppCompatActivity {
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
   // CompletableFuture requires api level 24
   protected void onCreate(Bundle savedInstanceState) {
+
     super.onCreate(savedInstanceState);
 
     if (!DemoUtils.checkIsSupportedDeviceOrFinish(this)) {
@@ -350,6 +360,29 @@ public class SolarActivity extends AppCompatActivity {
   }
 
   private Node createSolarSystem() {
+    Reader csv_file = null;
+    Iterable<CSVRecord> records = null;
+
+    try {
+      csv_file = new FileReader("../../../../../sampledata/data/worldcities.csv");
+      records = CSVFormat.DEFAULT.parse(csv_file);
+      Log.i("CSV", "Found csv file successfully");
+    }
+    catch (Exception e) {
+      if (e.equals(FileNotFoundException.class)) {
+        throw new IllegalArgumentException("File not found");
+      }else if (e.equals(IOException.class)) {
+        throw new IllegalArgumentException("CSV format cannot be passed");
+      }
+    }
+
+    ArrayList<City> cities = new ArrayList<>();
+    for (CSVRecord record : records) {
+      if (record.get("capital").equals("primary")) {
+        cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
+      }
+    }
+
     Node base = new Node();
 
     Node sun = new Node();
