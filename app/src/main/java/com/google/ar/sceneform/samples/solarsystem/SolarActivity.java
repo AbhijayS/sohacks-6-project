@@ -374,8 +374,8 @@ public class SolarActivity extends AppCompatActivity {
     Node newCity = new Node();
     newCity.setParent(sunVisual);
     newCity.setRenderable(markerRenderable);
-    newCity.setLocalPosition(new Vector3((float) city.x, (float) city.y, (float) city.z));
-    newCity.setLocalScale(new Vector3(2.0f, 2.0f, 2.0f));
+    newCity.setLocalPosition(new Vector3((float) city.x, 0.5f + (float) city.y, (float) city.z));
+    newCity.setLocalScale(new Vector3(0.02f, 0.02f, 0.02f));
   }
 
   private Node createSolarSystem() {
