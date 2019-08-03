@@ -110,3 +110,8 @@ sceneform.asset('sampledata/models/Golf ball.obj',
         'default',
         'sampledata/models/Golf ball.sfa',
         'src/main/assets/Golf ball')
+
+sceneform.asset('sampledata/models/model.obj',
+        'default',
+        'sampledata/models/model.sfa',
+        'src/main/assets/model')
