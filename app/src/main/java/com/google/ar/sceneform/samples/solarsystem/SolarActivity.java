@@ -382,7 +382,7 @@ public class SolarActivity extends AppCompatActivity {
     List<CSVRecord> records = new ArrayList<>();
 
     try {
-      csv_file = new FileReader("../../../../../../../../sampledata/data/worldcities.csv");
+      csv_file = new FileReader("../../../../../../../../../sampledata/data/worldcities.csv");
       records = CSVFormat.DEFAULT.parse(csv_file).getRecords();
       System.out.println("Found csv file successfully");
       Log.i("CSV STATUS", "Found csv file successfully");
