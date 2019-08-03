@@ -374,8 +374,8 @@ public class SolarActivity extends AppCompatActivity {
     Node newCity = new Node();
     newCity.setParent(sunVisual);
     newCity.setRenderable(markerRenderable);
-    newCity.setLocalPosition(new Vector3((float) city.x, (float) city.y, (float) city.z));
-    newCity.setLocalScale(new Vector3(2.0f, 2.0f, 2.0f));
+    newCity.setLocalPosition(new Vector3((float) city.x, 0.5f + (float) city.y, (float) city.z));
+    newCity.setLocalScale(new Vector3(0.02f, 0.02f, 0.02f));
   }
 
   private Node createSolarSystem() {
@@ -384,10 +384,8 @@ public class SolarActivity extends AppCompatActivity {
     List<CSVRecord> records = new ArrayList<>();
 
     try {
-//      csv_file = new FileReader("../../../../../../../../../sampledata/data/worldcities.csv");
       csv_file = new InputStreamReader(getAssets().open("worldcities.csv"));
       records = CSVFormat.EXCEL.withHeader().parse(csv_file).getRecords();
-      Log.i("CSV STATUS", "Found csv file successfully");
       Log.i("SOHACKS", "Found csv file successfully");
     }
     catch (Exception e) {
@@ -411,6 +409,7 @@ public class SolarActivity extends AppCompatActivity {
 
       }
     }
+
 
     Node base = new Node();
 
