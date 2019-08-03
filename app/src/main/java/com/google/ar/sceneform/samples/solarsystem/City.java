@@ -99,7 +99,7 @@ public class City extends Node implements Node.OnTapListener {
         this.context = context;
         this.cityName = cityName;
         this.latitude = latitude;
-        this.longitude = -longitude;
+        this.longitude = -1*longitude-22;
         this.population = population;
         this.radius = radius;
         this.scale = scale;
@@ -114,11 +114,27 @@ public class City extends Node implements Node.OnTapListener {
     }
 
     void calculateXYZ() {
-        x = radius * Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(longitude));
+        this.x = calculateX();
+        this.y = calculateY();
+        this.z = calculateZ();
+    }
 
-        z = radius * Math.cos(Math.toRadians(latitude)) * Math.sin(Math.toRadians(longitude));
+    double calculateX() {
+        double x = radius * Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(longitude));
+//        Log.i("SOHACKS", "x:" + x);
+        return x;
+    }
 
-        y = radius * Math.sin(Math.toRadians(latitude));
+    double calculateY() {
+        double y = radius * Math.sin(Math.toRadians(latitude));
+//        Log.i("SOHACKS", "y:" + y);
+        return y;
+    }
+
+    double calculateZ() {
+        double z = radius * Math.cos(Math.toRadians(latitude)) * Math.sin(Math.toRadians(longitude));
+//        Log.i("SOHACKS", "z:" + z);
+        return z;
     }
 
     @Override
@@ -134,7 +150,7 @@ public class City extends Node implements Node.OnTapListener {
             infoCard.setParent(this);
             infoCard.setEnabled(false);
             infoCard.setLocalPosition(new Vector3(0.0f, 0.0f, 0.0f));
-            infoCard.setLocalScale(new Vector3(10.0f, 10.0f, 10.0f));
+            infoCard.setLocalScale(new Vector3(5f, 5f, 5f));
 
             ViewRenderable.builder()
                     .setView(context, R.layout.planet_card_view)
