@@ -118,11 +118,11 @@ public class SolarActivity extends AppCompatActivity {
 //        ModelRenderable.builder().setSource(this, Uri.parse("Neptune.sfb")).build();
 
     // Build a renderable from a 2D View.
-    CompletableFuture<ViewRenderable> solarControlsStage =
-        ViewRenderable.builder().setView(this, R.layout.solar_controls).build();
+//    CompletableFuture<ViewRenderable> solarControlsStage =
+//        ViewRenderable.builder().setView(this, R.layout.solar_controls).build();
 
     CompletableFuture.allOf(
-            sunStage,
+            sunStage
 //            mercuryStage,
 //            venusStage,
 //            earthStage,
@@ -132,7 +132,8 @@ public class SolarActivity extends AppCompatActivity {
 //            saturnStage,
 //            uranusStage,
 //            neptuneStage,
-            solarControlsStage)
+//            solarControlsStage
+    )
         .handle(
             (notUsed, throwable) -> {
               // When you build a Renderable, Sceneform loads its resources in the background while
@@ -155,7 +156,7 @@ public class SolarActivity extends AppCompatActivity {
 //                saturnRenderable = saturnStage.get();
 //                uranusRenderable = uranusStage.get();
 //                neptuneRenderable = neptuneStage.get();
-                solarControlsRenderable = solarControlsStage.get();
+//                solarControlsRenderable = solarControlsStage.get();
 
                 // Everything finished loading successfully.
                 hasFinishedLoading = true;
