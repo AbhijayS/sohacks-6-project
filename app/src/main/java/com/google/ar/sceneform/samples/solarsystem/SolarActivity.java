@@ -424,6 +424,10 @@ public class SolarActivity extends AppCompatActivity {
     mars.setLocalPosition(new Vector3(0.0f, 0.5f, EARTH_RADIUS));
     mars.setLocalScale(new Vector3(0.01f, 0.01f, 0.01f));
 
+    for (City c:cities) {
+      addMarker(c, sunVisual);
+    }
+
 //    Node solarControls = new Node();
 //    solarControls.setParent(sun);
 //    solarControls.setRenderable(solarControlsRenderable);
