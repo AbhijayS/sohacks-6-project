@@ -379,6 +379,7 @@ public class SolarActivity extends AppCompatActivity {
   }
 
   private Node createSolarSystem() {
+    Log.i("SOHACKS", "createSolarSystem function");
     Reader csv_file = null;
     List<CSVRecord> records = new ArrayList<>();
 
@@ -390,7 +391,8 @@ public class SolarActivity extends AppCompatActivity {
       Log.i("SOHACKS", "Found csv file successfully");
     }
     catch (Exception e) {
-      if (e.equals(FileNotFoundException.class)) {
+        Log.i("SOHACKS", "ERRROR");
+        if (e.equals(FileNotFoundException.class)) {
         throw new IllegalArgumentException("File not found");
       }else if (e.equals(IOException.class)) {
         throw new IllegalArgumentException("CSV format cannot be passed");
