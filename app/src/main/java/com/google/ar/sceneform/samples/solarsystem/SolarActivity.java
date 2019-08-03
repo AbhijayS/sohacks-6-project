@@ -400,17 +400,19 @@ public class SolarActivity extends AppCompatActivity {
     }
 
     ArrayList<City> cities = new ArrayList<>();
-    for (CSVRecord record : records) {
-      if (record.get("capital").equals("primary")) {
-        try {
-          cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
-        }
-        catch (Exception e){
+//    for (CSVRecord record : records) {
+//      if (record.get("capital").equals("primary")) {
+//        try {
+//          cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
+//        }
+//        catch (Exception e){
+//
+//        }
+//
+//      }
+//    }
 
-        }
-
-      }
-    }
+    cities.add(new City("Mexico City", -99.131, 19.4424, 19028000, EARTH_RADIUS));
 
     Node base = new Node();
 
