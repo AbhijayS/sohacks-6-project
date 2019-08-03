@@ -98,24 +98,24 @@ public class SolarActivity extends AppCompatActivity {
     // Build all the planet models.
     CompletableFuture<ModelRenderable> sunStage =
         ModelRenderable.builder().setSource(this, Uri.parse("earth_obj.sfb")).build();
-    CompletableFuture<ModelRenderable> mercuryStage =
-        ModelRenderable.builder().setSource(this, Uri.parse("Mercury.sfb")).build();
-    CompletableFuture<ModelRenderable> venusStage =
-        ModelRenderable.builder().setSource(this, Uri.parse("Venus.sfb")).build();
-    CompletableFuture<ModelRenderable> earthStage =
-        ModelRenderable.builder().setSource(this, Uri.parse("Earth.sfb")).build();
-    CompletableFuture<ModelRenderable> lunaStage =
-        ModelRenderable.builder().setSource(this, Uri.parse("Luna.sfb")).build();
-    CompletableFuture<ModelRenderable> marsStage =
-        ModelRenderable.builder().setSource(this, Uri.parse("Mars.sfb")).build();
-    CompletableFuture<ModelRenderable> jupiterStage =
-        ModelRenderable.builder().setSource(this, Uri.parse("Jupiter.sfb")).build();
-    CompletableFuture<ModelRenderable> saturnStage =
-        ModelRenderable.builder().setSource(this, Uri.parse("Saturn.sfb")).build();
-    CompletableFuture<ModelRenderable> uranusStage =
-        ModelRenderable.builder().setSource(this, Uri.parse("Uranus.sfb")).build();
-    CompletableFuture<ModelRenderable> neptuneStage =
-        ModelRenderable.builder().setSource(this, Uri.parse("Neptune.sfb")).build();
+//    CompletableFuture<ModelRenderable> mercuryStage =
+//        ModelRenderable.builder().setSource(this, Uri.parse("Mercury.sfb")).build();
+//    CompletableFuture<ModelRenderable> venusStage =
+//        ModelRenderable.builder().setSource(this, Uri.parse("Venus.sfb")).build();
+//    CompletableFuture<ModelRenderable> earthStage =
+//        ModelRenderable.builder().setSource(this, Uri.parse("Earth.sfb")).build();
+//    CompletableFuture<ModelRenderable> lunaStage =
+//        ModelRenderable.builder().setSource(this, Uri.parse("Luna.sfb")).build();
+//    CompletableFuture<ModelRenderable> marsStage =
+//        ModelRenderable.builder().setSource(this, Uri.parse("Mars.sfb")).build();
+//    CompletableFuture<ModelRenderable> jupiterStage =
+//        ModelRenderable.builder().setSource(this, Uri.parse("Jupiter.sfb")).build();
+//    CompletableFuture<ModelRenderable> saturnStage =
+//        ModelRenderable.builder().setSource(this, Uri.parse("Saturn.sfb")).build();
+//    CompletableFuture<ModelRenderable> uranusStage =
+//        ModelRenderable.builder().setSource(this, Uri.parse("Uranus.sfb")).build();
+//    CompletableFuture<ModelRenderable> neptuneStage =
+//        ModelRenderable.builder().setSource(this, Uri.parse("Neptune.sfb")).build();
 
     // Build a renderable from a 2D View.
     CompletableFuture<ViewRenderable> solarControlsStage =
@@ -123,15 +123,15 @@ public class SolarActivity extends AppCompatActivity {
 
     CompletableFuture.allOf(
             sunStage,
-            mercuryStage,
-            venusStage,
-            earthStage,
-            lunaStage,
-            marsStage,
-            jupiterStage,
-            saturnStage,
-            uranusStage,
-            neptuneStage,
+//            mercuryStage,
+//            venusStage,
+//            earthStage,
+//            lunaStage,
+//            marsStage,
+//            jupiterStage,
+//            saturnStage,
+//            uranusStage,
+//            neptuneStage,
             solarControlsStage)
         .handle(
             (notUsed, throwable) -> {
@@ -146,15 +146,15 @@ public class SolarActivity extends AppCompatActivity {
 
               try {
                 sunRenderable = sunStage.get();
-                mercuryRenderable = mercuryStage.get();
-                venusRenderable = venusStage.get();
-                earthRenderable = earthStage.get();
-                lunaRenderable = lunaStage.get();
-                marsRenderable = marsStage.get();
-                jupiterRenderable = jupiterStage.get();
-                saturnRenderable = saturnStage.get();
-                uranusRenderable = uranusStage.get();
-                neptuneRenderable = neptuneStage.get();
+//                mercuryRenderable = mercuryStage.get();
+//                venusRenderable = venusStage.get();
+//                earthRenderable = earthStage.get();
+//                lunaRenderable = lunaStage.get();
+//                marsRenderable = marsStage.get();
+//                jupiterRenderable = jupiterStage.get();
+//                saturnRenderable = saturnStage.get();
+//                uranusRenderable = uranusStage.get();
+//                neptuneRenderable = neptuneStage.get();
                 solarControlsRenderable = solarControlsStage.get();
 
                 // Everything finished loading successfully.
