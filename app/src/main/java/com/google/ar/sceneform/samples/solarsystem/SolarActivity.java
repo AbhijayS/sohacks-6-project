@@ -94,7 +94,7 @@ public class SolarActivity extends AppCompatActivity {
   // Astronomical units to meters ratio. Used for positioning the planets of the solar system.
   private static final float AU_TO_METERS = 0.5f;
 
-  public static final float EARTH_RADIUS = 0.463f;
+  public static final float EARTH_RADIUS = 0.53f;
 
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
@@ -370,13 +370,13 @@ public class SolarActivity extends AppCompatActivity {
     return false;
   }
 
-  private void addMarker(City city, Node sunVisual) {
-    Node newCity = new Node();
-    newCity.setParent(sunVisual);
-    newCity.setRenderable(markerRenderable);
-    newCity.setLocalPosition(new Vector3((float) city.x, 0.5f + (float) city.y, (float) city.z));
-    newCity.setLocalScale(new Vector3(0.05f, 0.05f, 0.05f));
-  }
+//  private void addMarker(City city, Node sunVisual) {
+//    Node newCity = new Node();
+//    newCity.setParent(sunVisual);
+//    newCity.setRenderable(markerRenderable);
+//    newCity.setLocalPosition(new Vector3((float) city.x, 0.5f + (float) city.y, (float) city.z));
+//    newCity.setLocalScale(new Vector3(0.02f, 0.02f, 0.02f));
+//  }
 
   private Node createSolarSystem() {
     Log.i("SOHACKS", "createSolarSystem function");
@@ -396,19 +396,6 @@ public class SolarActivity extends AppCompatActivity {
         throw new IllegalArgumentException("File not found");
       }else if (e.equals(IOException.class)) {
         throw new IllegalArgumentException("CSV format cannot be passed");
-      }
-    }
-
-    ArrayList<City> cities = new ArrayList<>();
-    for (CSVRecord record : records) {
-      if (record.get("capital").equals("primary")) {
-        try {
-          cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population"))));
-        }
-        catch (Exception e){
-
-        }
-
       }
     }
 
@@ -436,8 +423,28 @@ public class SolarActivity extends AppCompatActivity {
     mars.setLocalPosition(new Vector3(0.0f, 0.5f, EARTH_RADIUS));
     mars.setLocalScale(new Vector3(0.01f, 0.01f, 0.01f));
 
-    for (City c:cities) {
-      addMarker(c, sunVisual);
+//    for (City c:cities) {
+//      addMarker(c, sunVisual);
+//    }
+
+    ArrayList<City> cities = new ArrayList<>();
+    for (CSVRecord record : records) {
+      if (record.get("capital").equals("primary")) {
+        try {
+          // Create the planet and position it relative to the sun.
+          City newCity =
+                  new City(
+                          this, markerRenderable, record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), (double)EARTH_RADIUS, 0.1f);
+          newCity.setParent(sunVisual);
+          newCity.setLocalPosition(new Vector3((float) newCity.getX(), (float) newCity.getY()+0.5f, (float) newCity.getZ()));
+          //cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
+        }
+        catch (Exception e){
+
+
+        }
+
+      }
     }
 
 //    Node solarControls = new Node();
