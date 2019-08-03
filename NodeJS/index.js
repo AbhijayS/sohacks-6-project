@@ -20,8 +20,13 @@ app.use(express.static('public'))
 app.listen(port, () => console.log(`app listening on port ${port}`));
 
 app.get('/', function (req, res) {
-	res.sendFile(path.join(__dirname + '/public/test.html'));
+	res.sendFile(path.join(__dirname + '/public/home.html'));
 });
+
+app.get('/upload', function (req, res) {
+	res.sendFile(path.join(__dirname + '/public/new file.html'));
+});
+
 
 app.post('/', upload.single("file"), function (req, res) {
 	console.log(req.file);
