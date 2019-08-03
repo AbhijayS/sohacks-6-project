@@ -47,6 +47,7 @@ import com.google.ar.sceneform.rendering.ViewRenderable;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
@@ -382,9 +383,9 @@ public class SolarActivity extends AppCompatActivity {
     List<CSVRecord> records = new ArrayList<>();
 
     try {
-      csv_file = new FileReader("../../../../../../../../../sampledata/data/worldcities.csv");
+//      csv_file = new FileReader("../../../../../../../../../sampledata/data/worldcities.csv");
+      csv_file = new InputStreamReader(getAssets().open("worldcities.csv"));
       records = CSVFormat.DEFAULT.parse(csv_file).getRecords();
-      System.out.println("Found csv file successfully");
       Log.i("CSV STATUS", "Found csv file successfully");
       Log.i("SOHACKS", "Found csv file successfully");
     }
