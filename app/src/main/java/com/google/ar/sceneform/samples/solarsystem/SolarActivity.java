@@ -74,6 +74,7 @@ public class SolarActivity extends AppCompatActivity {
   private ModelRenderable earthRenderable;
   private ModelRenderable lunaRenderable;
   private ModelRenderable marsRenderable;
+  private ModelRenderable markerRenderable;
   private ModelRenderable jupiterRenderable;
   private ModelRenderable saturnRenderable;
   private ModelRenderable uranusRenderable;
@@ -130,6 +131,9 @@ public class SolarActivity extends AppCompatActivity {
 //    CompletableFuture<ModelRenderable> neptuneStage =
 //        ModelRenderable.builder().setSource(this, Uri.parse("Neptune.sfb")).build();
 
+    CompletableFuture<ModelRenderable> markerStage =
+            ModelRenderable.builder().setSource(this, Uri.parse("Golf ball.sfb")).build();
+
     // Build a renderable from a 2D View.
 //    CompletableFuture<ViewRenderable> solarControlsStage =
 //        ViewRenderable.builder().setView(this, R.layout.solar_controls).build();
@@ -140,7 +144,8 @@ public class SolarActivity extends AppCompatActivity {
 //            venusStage,
 //            earthStage,
             lunaStage,
-            marsStage
+            marsStage,
+            markerStage
 //            jupiterStage,
 //            saturnStage,
 //            uranusStage,
@@ -165,6 +170,7 @@ public class SolarActivity extends AppCompatActivity {
 //                earthRenderable = earthStage.get();
                 lunaRenderable = lunaStage.get();
                 marsRenderable = marsStage.get();
+                markerRenderable = markerStage.get();
 //                jupiterRenderable = jupiterStage.get();
 //                saturnRenderable = saturnStage.get();
 //                uranusRenderable = uranusStage.get();
