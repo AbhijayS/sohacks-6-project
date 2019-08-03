@@ -6,7 +6,7 @@ public class City {
 
     City(String name, double longitude, double latitude, double population, double radius) {
         this.name = name;
-        this.longitude = longitude;
+        this.longitude = -longitude;
         this.latitude = latitude;
         this.population = population;
 

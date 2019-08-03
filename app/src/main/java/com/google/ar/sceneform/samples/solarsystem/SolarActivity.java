@@ -384,10 +384,8 @@ public class SolarActivity extends AppCompatActivity {
     List<CSVRecord> records = new ArrayList<>();
 
     try {
-//      csv_file = new FileReader("../../../../../../../../../sampledata/data/worldcities.csv");
       csv_file = new InputStreamReader(getAssets().open("worldcities.csv"));
       records = CSVFormat.EXCEL.withHeader().parse(csv_file).getRecords();
-      Log.i("CSV STATUS", "Found csv file successfully");
       Log.i("SOHACKS", "Found csv file successfully");
     }
     catch (Exception e) {
@@ -400,19 +398,18 @@ public class SolarActivity extends AppCompatActivity {
     }
 
     ArrayList<City> cities = new ArrayList<>();
-//    for (CSVRecord record : records) {
-//      if (record.get("capital").equals("primary")) {
-//        try {
-//          cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
-//        }
-//        catch (Exception e){
-//
-//        }
-//
-//      }
-//    }
+    for (CSVRecord record : records) {
+      if (record.get("capital").equals("primary")) {
+        try {
+          cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
+        }
+        catch (Exception e){
 
-    cities.add(new City("Mexico City", -99.131, 19.4424, 19028000, EARTH_RADIUS));
+        }
+
+      }
+    }
+
 
     Node base = new Node();
 
