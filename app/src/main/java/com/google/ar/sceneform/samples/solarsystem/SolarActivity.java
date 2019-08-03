@@ -73,6 +73,7 @@ public class SolarActivity extends AppCompatActivity {
   private ModelRenderable earthRenderable;
   private ModelRenderable lunaRenderable;
   private ModelRenderable marsRenderable;
+  private ModelRenderable markerRenderable;
   private ModelRenderable jupiterRenderable;
   private ModelRenderable saturnRenderable;
   private ModelRenderable uranusRenderable;
@@ -142,7 +143,8 @@ public class SolarActivity extends AppCompatActivity {
 //            venusStage,
 //            earthStage,
             lunaStage,
-            marsStage
+            marsStage,
+            markerStage
 //            jupiterStage,
 //            saturnStage,
 //            uranusStage,
@@ -167,6 +169,7 @@ public class SolarActivity extends AppCompatActivity {
 //                earthRenderable = earthStage.get();
                 lunaRenderable = lunaStage.get();
                 marsRenderable = marsStage.get();
+                markerRenderable = markerStage.get();
 //                jupiterRenderable = jupiterStage.get();
 //                saturnRenderable = saturnStage.get();
 //                uranusRenderable = uranusStage.get();
