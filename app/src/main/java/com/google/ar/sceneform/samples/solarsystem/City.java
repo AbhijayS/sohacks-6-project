@@ -18,7 +18,7 @@ public class City {
 
         z = radius * Math.cos(Math.toRadians(latitude)) * Math.sin(Math.toRadians(longitude));
 
-        y = radius *Math.sin(Math.toDegrees(latitude));
+        y = radius * Math.sin(Math.toRadians(latitude));
     }
 
 }

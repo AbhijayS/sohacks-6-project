@@ -49,6 +49,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import org.apache.commons.csv.*;
@@ -373,17 +374,19 @@ public class SolarActivity extends AppCompatActivity {
     newCity.setParent(sunVisual);
     newCity.setRenderable(markerRenderable);
     newCity.setLocalPosition(new Vector3((float) city.x, (float) city.y, (float) city.z));
-    newCity.setLocalScale(new Vector3(0.5f, 0.5f, 0.5f));
+    newCity.setLocalScale(new Vector3(2.0f, 2.0f, 2.0f));
   }
 
   private Node createSolarSystem() {
     Reader csv_file = null;
-    Iterable<CSVRecord> records = null;
+    List<CSVRecord> records = new ArrayList<>();
 
     try {
-      csv_file = new FileReader("../../../../../sampledata/data/worldcities.csv");
-      records = CSVFormat.DEFAULT.parse(csv_file);
-      Log.i("CSV", "Found csv file successfully");
+      csv_file = new FileReader("../../../../../../../../sampledata/data/worldcities.csv");
+      records = CSVFormat.DEFAULT.parse(csv_file).getRecords();
+      System.out.println("Found csv file successfully");
+      Log.i("CSV STATUS", "Found csv file successfully");
+      Log.i("SOHACKS", "Found csv file successfully");
     }
     catch (Exception e) {
       if (e.equals(FileNotFoundException.class)) {
@@ -423,6 +426,10 @@ public class SolarActivity extends AppCompatActivity {
     mars.setRenderable(marsRenderable);
     mars.setLocalPosition(new Vector3(0.0f, 0.5f, EARTH_RADIUS));
     mars.setLocalScale(new Vector3(0.01f, 0.01f, 0.01f));
+
+    for (City c:cities) {
+      addMarker(c, sunVisual);
+    }
 
 //    Node solarControls = new Node();
 //    solarControls.setParent(sun);
