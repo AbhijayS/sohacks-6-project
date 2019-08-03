@@ -94,7 +94,7 @@ public class SolarActivity extends AppCompatActivity {
   // Astronomical units to meters ratio. Used for positioning the planets of the solar system.
   private static final float AU_TO_METERS = 0.5f;
 
-  private static final float EARTH_RADIUS = 0.463f;
+  public static final float EARTH_RADIUS = 0.463f;
 
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
@@ -375,7 +375,7 @@ public class SolarActivity extends AppCompatActivity {
     newCity.setParent(sunVisual);
     newCity.setRenderable(markerRenderable);
     newCity.setLocalPosition(new Vector3((float) city.x, 0.5f + (float) city.y, (float) city.z));
-    newCity.setLocalScale(new Vector3(0.02f, 0.02f, 0.02f));
+    newCity.setLocalScale(new Vector3(0.05f, 0.05f, 0.05f));
   }
 
   private Node createSolarSystem() {
@@ -384,8 +384,10 @@ public class SolarActivity extends AppCompatActivity {
     List<CSVRecord> records = new ArrayList<>();
 
     try {
+//      csv_file = new FileReader("../../../../../../../../../sampledata/data/worldcities.csv");
       csv_file = new InputStreamReader(getAssets().open("worldcities.csv"));
       records = CSVFormat.EXCEL.withHeader().parse(csv_file).getRecords();
+      Log.i("CSV STATUS", "Found csv file successfully");
       Log.i("SOHACKS", "Found csv file successfully");
     }
     catch (Exception e) {
@@ -401,7 +403,7 @@ public class SolarActivity extends AppCompatActivity {
     for (CSVRecord record : records) {
       if (record.get("capital").equals("primary")) {
         try {
-          cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
+          cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population"))));
         }
         catch (Exception e){
 
@@ -409,7 +411,6 @@ public class SolarActivity extends AppCompatActivity {
 
       }
     }
-
 
     Node base = new Node();
 
