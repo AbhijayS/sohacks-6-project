@@ -41,6 +41,7 @@
 package com.google.ar.sceneform.samples.solarsystem;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.TextView;
@@ -51,6 +52,9 @@ import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.ViewRenderable;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * Node that represents a planet.
@@ -72,7 +76,9 @@ public class City extends Node implements Node.OnTapListener {
 //    private final float orbitDegreesPerSecond;
 //    private final float axisTilt;
     private final ModelRenderable cityRenderable;
-    private double longitude, latitude, population, radius, x, y, z;
+    private final Snackbar cityInfoSnackbar;
+    private double longitude, latitude, radius, x, y, z;
+    private long population;
     private float scale;
 //    private final SolarSettings solarSettings;
 
@@ -85,10 +91,11 @@ public class City extends Node implements Node.OnTapListener {
     public City(
             Context context,
             ModelRenderable cityRenderable,
+            Snackbar infoSnackbar,
             String cityName,
             Double latitude,
             Double longitude,
-            Double population,
+            long population,
             Double radius,
             float scale
 //            float planetScale,
@@ -107,6 +114,7 @@ public class City extends Node implements Node.OnTapListener {
 //        this.orbitDegreesPerSecond = orbitDegreesPerSecond;
 //        this.axisTilt = axisTilt;
         this.cityRenderable = cityRenderable;
+        this.cityInfoSnackbar = infoSnackbar;
 //        this.solarSettings = solarSettings;
         setOnTapListener(this);
 
@@ -185,11 +193,15 @@ public class City extends Node implements Node.OnTapListener {
     @Override
     public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
         Log.i("SOHACKS", "TAPPED ME");
-        if (infoCard == null) {
-            return;
-        }
-
-        infoCard.setEnabled(!infoCard.isEnabled());
+//        if (infoCard == null) {
+//            return;
+//        }
+//
+//        infoCard.setEnabled(!infoCard.isEnabled());
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        String populationAsString = numberFormat.format(population);
+        String info = cityName.toUpperCase() + "\n" + "Population: " + populationAsString;
+        SolarActivity.updateInfoWindow(info);
     }
 
     @Override
@@ -211,6 +223,10 @@ public class City extends Node implements Node.OnTapListener {
         Quaternion lookRotation = Quaternion.lookRotation(direction, Vector3.up());
         infoCard.setWorldRotation(lookRotation);
     }
+
+
+
+
 
     public double getX() {return x;}
     public double getY() {return y;}
