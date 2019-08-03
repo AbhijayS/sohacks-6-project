@@ -67,6 +67,7 @@ public class SolarActivity extends AppCompatActivity {
 
   private GestureDetector gestureDetector;
   private Snackbar loadingMessageSnackbar = null;
+  private static Snackbar cityInfoSnackbar = null;
 
   private ArSceneView arSceneView;
 
@@ -96,6 +97,8 @@ public class SolarActivity extends AppCompatActivity {
 
   public static final float EARTH_RADIUS = 0.53f;
 
+  public static String cityInfo = "";
+
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
   // CompletableFuture requires api level 24
@@ -110,6 +113,11 @@ public class SolarActivity extends AppCompatActivity {
 
     setContentView(R.layout.activity_solar);
     arSceneView = findViewById(R.id.ar_scene_view);
+
+    cityInfoSnackbar = Snackbar.make(
+            SolarActivity.this.findViewById(android.R.id.content),
+            "",
+            Snackbar.LENGTH_INDEFINITE);
 
     // Build all the planet models.
     CompletableFuture<ModelRenderable> sunStage =
@@ -434,7 +442,7 @@ public class SolarActivity extends AppCompatActivity {
           // Create the planet and position it relative to the sun.
           City newCity =
                   new City(
-                          this, markerRenderable, record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), (double)EARTH_RADIUS, 0.1f);
+                          this, markerRenderable, cityInfoSnackbar, record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Long.parseLong(record.get("population")), (double)EARTH_RADIUS, 0.1f);
           newCity.setParent(sunVisual);
           newCity.setLocalPosition(new Vector3((float) newCity.getX(), (float) newCity.getY()+0.5f, (float) newCity.getZ()));
           //cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
@@ -558,5 +566,25 @@ public class SolarActivity extends AppCompatActivity {
 
     loadingMessageSnackbar.dismiss();
     loadingMessageSnackbar = null;
+  }
+
+  public static void updateInfoWindow(String s) {
+    if (cityInfoSnackbar == null) {
+      return;
+    }
+
+    cityInfo = s;
+    cityInfoSnackbar.setText(cityInfo);
+
+    cityInfoSnackbar.getView().setBackgroundColor(0xbf323232);
+    cityInfoSnackbar.show();
+  }
+
+  public void hideInfoWindow() {
+    if (cityInfoSnackbar == null) {
+      return;
+    }
+    cityInfoSnackbar.dismiss();
+    cityInfoSnackbar = null;
   }
 }
