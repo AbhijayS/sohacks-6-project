@@ -81,6 +81,8 @@ public class SolarActivity extends AppCompatActivity {
   // Astronomical units to meters ratio. Used for positioning the planets of the solar system.
   private static final float AU_TO_METERS = 0.5f;
 
+  private static final float EARTH_RADIUS = 0.463f;
+
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
   // CompletableFuture requires api level 24
@@ -371,7 +373,7 @@ public class SolarActivity extends AppCompatActivity {
     Node mars = new Node();
     mars.setParent(sunVisual);
     mars.setRenderable(marsRenderable);
-    mars.setLocalPosition(new Vector3(0.0f, 0.5f, 0.463f));
+    mars.setLocalPosition(new Vector3(0.0f, 0.5f, EARTH_RADIUS));
     mars.setLocalScale(new Vector3(0.01f, 0.01f, 0.01f));
 
 //    Node solarControls = new Node();
