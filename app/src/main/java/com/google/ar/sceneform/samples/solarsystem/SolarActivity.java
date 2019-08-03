@@ -90,6 +90,8 @@ public class SolarActivity extends AppCompatActivity {
   // Astronomical units to meters ratio. Used for positioning the planets of the solar system.
   private static final float AU_TO_METERS = 0.5f;
 
+  private static final float EARTH_RADIUS = 0.463f;
+
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
   // CompletableFuture requires api level 24
@@ -114,10 +116,10 @@ public class SolarActivity extends AppCompatActivity {
 //        ModelRenderable.builder().setSource(this, Uri.parse("Venus.sfb")).build();
 //    CompletableFuture<ModelRenderable> earthStage =
 //        ModelRenderable.builder().setSource(this, Uri.parse("Earth.sfb")).build();
-//    CompletableFuture<ModelRenderable> lunaStage =
-//        ModelRenderable.builder().setSource(this, Uri.parse("Luna.sfb")).build();
-//    CompletableFuture<ModelRenderable> marsStage =
-//        ModelRenderable.builder().setSource(this, Uri.parse("Mars.sfb")).build();
+    CompletableFuture<ModelRenderable> lunaStage =
+        ModelRenderable.builder().setSource(this, Uri.parse("Luna.sfb")).build();
+    CompletableFuture<ModelRenderable> marsStage =
+        ModelRenderable.builder().setSource(this, Uri.parse("Mars.sfb")).build();
 //    CompletableFuture<ModelRenderable> jupiterStage =
 //        ModelRenderable.builder().setSource(this, Uri.parse("Jupiter.sfb")).build();
 //    CompletableFuture<ModelRenderable> saturnStage =
@@ -132,12 +134,12 @@ public class SolarActivity extends AppCompatActivity {
 //        ViewRenderable.builder().setView(this, R.layout.solar_controls).build();
 
     CompletableFuture.allOf(
-            sunStage
+            sunStage,
 //            mercuryStage,
 //            venusStage,
 //            earthStage,
-//            lunaStage,
-//            marsStage,
+            lunaStage,
+            marsStage
 //            jupiterStage,
 //            saturnStage,
 //            uranusStage,
@@ -160,8 +162,8 @@ public class SolarActivity extends AppCompatActivity {
 //                mercuryRenderable = mercuryStage.get();
 //                venusRenderable = venusStage.get();
 //                earthRenderable = earthStage.get();
-//                lunaRenderable = lunaStage.get();
-//                marsRenderable = marsStage.get();
+                lunaRenderable = lunaStage.get();
+                marsRenderable = marsStage.get();
 //                jupiterRenderable = jupiterStage.get();
 //                saturnRenderable = saturnStage.get();
 //                uranusRenderable = uranusStage.get();
@@ -385,14 +387,27 @@ public class SolarActivity extends AppCompatActivity {
 
     Node base = new Node();
 
-    Node sun = new Node();
-    sun.setParent(base);
-    sun.setLocalPosition(new Vector3(0.0f, 0.5f, 0.0f));
+//    Node sun = new Node();
+//    sun.setParent(base);
+//    sun.setLocalPosition(new Vector3(0.0f, 0.5f, 0.0f));
 
     Node sunVisual = new Node();
-    sunVisual.setParent(sun);
+    sunVisual.setParent(base);
     sunVisual.setRenderable(sunRenderable);
+    sunVisual.setLocalPosition(new Vector3(0.0f, 0.5f, 0.0f));
     sunVisual.setLocalScale(new Vector3(0.5f, 0.5f, 0.5f));
+
+    Node luna = new Node();
+    luna.setParent(sunVisual);
+    luna.setRenderable(lunaRenderable);
+    luna.setLocalPosition(new Vector3(1.0f, 0.0f, 0.0f));
+    luna.setLocalScale(new Vector3(0.2f, 0.2f, 0.2f));
+
+    Node mars = new Node();
+    mars.setParent(sunVisual);
+    mars.setRenderable(marsRenderable);
+    mars.setLocalPosition(new Vector3(0.0f, 0.5f, EARTH_RADIUS));
+    mars.setLocalScale(new Vector3(0.01f, 0.01f, 0.01f));
 
 //    Node solarControls = new Node();
 //    solarControls.setParent(sun);
