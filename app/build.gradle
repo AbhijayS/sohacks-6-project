@@ -43,6 +43,7 @@ dependencies {
   implementation "com.google.ar.sceneform:core:1.10.0"
   implementation "com.android.support:appcompat-v7:28.0.0"
   implementation "com.android.support:design:28.0.0"
+    implementation fileTree(dir: 'tools', include: ['*.aar', '*.jar'], exclude: [])
 }
 
 apply plugin: 'com.google.ar.sceneform.plugin'
@@ -103,3 +104,8 @@ sceneform.asset('sampledata/earth_obj.obj',
         'default',
         'sampledata/earth_obj.sfa',
         'src/main/assets/earth_obj')
+
+sceneform.asset('sampledata/models/Golf ball.obj',
+        'default',
+        'sampledata/models/Golf ball.sfa',
+        'src/main/assets/Golf ball')
