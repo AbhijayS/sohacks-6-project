@@ -200,7 +200,7 @@ public class City extends Node implements Node.OnTapListener {
 //        infoCard.setEnabled(!infoCard.isEnabled());
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         String populationAsString = numberFormat.format(population);
-        String info = cityName.toUpperCase() + "\n" + "Population: " + populationAsString;
+        String info = cityName.toUpperCase() + "\n\n" + "Population: " + populationAsString;
         SolarActivity.updateInfoWindow(info);
     }
 
