@@ -129,6 +129,9 @@ public class SolarActivity extends AppCompatActivity {
 //    CompletableFuture<ModelRenderable> neptuneStage =
 //        ModelRenderable.builder().setSource(this, Uri.parse("Neptune.sfb")).build();
 
+    CompletableFuture<ModelRenderable> markerStage =
+            ModelRenderable.builder().setSource(this, Uri.parse("Golf ball.sfb")).build();
+
     // Build a renderable from a 2D View.
 //    CompletableFuture<ViewRenderable> solarControlsStage =
 //        ViewRenderable.builder().setView(this, R.layout.solar_controls).build();

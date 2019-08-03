@@ -104,3 +104,8 @@ sceneform.asset('sampledata/earth_obj.obj',
         'default',
         'sampledata/earth_obj.sfa',
         'src/main/assets/earth_obj')
+
+sceneform.asset('sampledata/models/Golf ball.obj',
+        'default',
+        'sampledata/models/Golf ball.sfa',
+        'src/main/assets/Golf ball')
