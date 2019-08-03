@@ -47,6 +47,7 @@ import com.google.ar.sceneform.rendering.ViewRenderable;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
@@ -378,18 +379,20 @@ public class SolarActivity extends AppCompatActivity {
   }
 
   private Node createSolarSystem() {
+    Log.i("SOHACKS", "createSolarSystem function");
     Reader csv_file = null;
     List<CSVRecord> records = new ArrayList<>();
 
     try {
-      csv_file = new FileReader("../../../../../../../../../sampledata/data/worldcities.csv");
-      records = CSVFormat.DEFAULT.parse(csv_file).getRecords();
-      System.out.println("Found csv file successfully");
+//      csv_file = new FileReader("../../../../../../../../../sampledata/data/worldcities.csv");
+      csv_file = new InputStreamReader(getAssets().open("worldcities.csv"));
+      records = CSVFormat.EXCEL.withHeader().parse(csv_file).getRecords();
       Log.i("CSV STATUS", "Found csv file successfully");
       Log.i("SOHACKS", "Found csv file successfully");
     }
     catch (Exception e) {
-      if (e.equals(FileNotFoundException.class)) {
+        Log.i("SOHACKS", "ERRROR");
+        if (e.equals(FileNotFoundException.class)) {
         throw new IllegalArgumentException("File not found");
       }else if (e.equals(IOException.class)) {
         throw new IllegalArgumentException("CSV format cannot be passed");
@@ -399,7 +402,13 @@ public class SolarActivity extends AppCompatActivity {
     ArrayList<City> cities = new ArrayList<>();
     for (CSVRecord record : records) {
       if (record.get("capital").equals("primary")) {
-        cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
+        try {
+          cities.add(new City(record.get("city"), Double.parseDouble(record.get("lat")), Double.parseDouble(record.get("lng")), Double.parseDouble(record.get("population")), EARTH_RADIUS));
+        }
+        catch (Exception e){
+
+        }
+
       }
     }
 
