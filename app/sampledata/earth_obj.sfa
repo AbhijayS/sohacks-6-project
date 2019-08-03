@@ -1,0 +1,76 @@
+{
+  materials: [
+    {
+      name: 'E2',
+      parameters: [
+        {
+          baseColor: 'earth_texture',
+        },
+        {
+          baseColorTint: [
+            0.64000000000000001,
+            0.64000000000000001,
+            0.64000000000000001,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.14280000000000001,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+    {
+      name: 'atmosphere',
+      parameters: [
+        {
+          baseColor: null,
+        },
+        {
+          baseColorTint: [
+            0.013468000000000001,
+            0.33890599999999999,
+            0.40562500000000001,
+            1,
+          ],
+        },
+        {
+          metallic: 0,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          opacity: 0.20000000000000001,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/earth_obj.obj',
+    name: 'earth_obj',
+    recenter: 'root',
+    scale: 0.49068099999999998,
+  },
+  samplers: [
+    {
+      file: 'sampledata\\earth_texture.jpg',
+      name: 'earth_texture',
+      pipeline_name: 'earth_texture.jpg',
+    },
+  ],
+  version: '0.54:2',
+}
